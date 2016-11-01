@@ -14,7 +14,7 @@ parse(tb_node_raw, {comment:"#"}, function(csv_err, csv_data){
   // console.log("%j",csv_data[2]);
 
   for(var cd=1; cd< csv_data.length ; cd+=2){
-  // for(var cd=1; cd< 100 ; cd++){
+  // for(var cd=1; cd< 1000 ; cd++){
     var dataIn = csv_data[cd];
 
     // console.log("datain : %j", dataIn);
@@ -24,7 +24,24 @@ parse(tb_node_raw, {comment:"#"}, function(csv_err, csv_data){
     var node_id = dataIn[0];
     var ldateTemp = dataIn[2].split('.');
     var ldate = new Date(dataIn[3]);
-    console.log(dataIn[3]);
+    console.log(dataIn[0] + ", " + dataIn[3]);
+
+    // for test log,lat
+    if (dataIn[22] == "") {
+      if (node_id == "0001.00000001") {
+        dataIn[22] = "37.5166";
+      } else {
+        dataIn[22] = "35.17944";
+      }
+    }
+    if (dataIn[21] == "") {
+      if (node_id == "0001.00000001") {
+        dataIn[21] = "127.029";
+      } else {
+        dataIn[21] = "129.07556";
+      }
+    }
+    console.log(dataIn[22] + ", " + dataIn[21]);
 
     // console.log("node_id : " + node_id);
     var s_logs = {
@@ -68,7 +85,6 @@ parse(tb_node_raw, {comment:"#"}, function(csv_err, csv_data){
       "node_geo" : {
         "lat" : dataIn[22],
         "lon" : dataIn[21],
-        "alt" : dataIn[23],
       }
     }
 

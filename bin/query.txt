@@ -1,0 +1,70 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+GET corecode-2016-08/_search
+
+delete corecode-2016.10*
+
+
+PUT corecode-2016-08
+{
+    "mappings" : {
+      "corecode" : {
+        "properties" : {
+          "node_id" : { "type" : "string", "index" : "not_analyzed" },
+          "event_type" : { "type" : "string", "index" : "not_analyzed" },
+          "measure_time" : { "type" : "string" },
+          "event_time" : { "type" : "date" },
+          "voltage" : { "type" : "double" },
+          "ampere" : { "type" : "double" },
+          "power_factor" : { "type" : "double" },
+          "active_power" : { "type" : "double" },
+          "reactive_power" : { "type" : "double" },
+          "apparent_power" : { "type" : "double" },
+          "amount_active_power" : { "type" : "double" },
+          "als_level" : { "type" : "integer" },
+          "dimming_level" : { "type" : "integer" },
+          "vibration_x" : { "type" : "integer" },
+          "vibration_y" : { "type" : "integer" },
+          "vibration_z" : { "type" : "integer" },
+          "vibration_max" : { "type" : "integer" },
+          "noise_origin_decibel" : { "type" : "double" },
+          "noise_origin_frequency" : { "type" : "integer" },
+          "noise_decibel" : { "type" : "double" },
+          "noise_frequency" : { "type" : "integer" },
+          "gps_longitude" : { "type" : "double" },
+          "gps_latitude" : { "type" : "double" },
+          "gps_altitude" : { "type" : "double" },
+          "node_geo" : { "type" : "geo_point" },
+          "gps_satellite_count" : { "type" : "integer" },
+          "status_als" : { "type" : "integer" },
+          "status_gps" : { "type" : "integer" },
+          "status_noise" : { "type" : "integer" },
+          "status_vibration" : { "type" : "integer" },
+          "status_power_meter" : { "type" : "integer" },
+          "status_emergency_led_active" : { "type" : "integer" },
+          "status_self_diagnostics_led_active" : { "type" : "integer" },
+          "status_active_mode" : { "type" : "integer" },
+          "status_led_on_off_type" : { "type" : "integer" },
+          "reboot_time" : { "type" : "string"},
+          "event_remain" : { "type" : "integer" },
+          "failfirmwareupdate" : { "type" : "integer" }
+        }
+      }
+    }
+  }
+
+-- reboot_time is null
+echo '{"event_time":"2016-08-17T15:25:29.000Z","node_id":"0001.0000000B","event_type":"1","measure_time":"2016.8.18","voltage":"0","ampere":"0","power_factor":"1","active_power":"0.000","reactive_power":"0","apparent_power":"0","amount_of_active_power":"0","als_level":"","dimming_level":"","vibration_x":"","vibration_y":"","vibration_z":"","vibration_max":"","noise_origin_decibel":"","noise_origin_frequency":"","noise_decibel":"","noise_frequency":"","gps_longitude":"","gps_latitude":"","gps_altitude":"","gps_satellite_count":"","status_als":"","status_gps":"","status_noise":"","status_vibration":"","status_power_meter":"","status_emergency_led_active":"","status_self_diagnostics_led_active":"","status_active_mode":"","status_led_on_off_type":"","reboot_time":"","event_remain":"0","failfirmwareupdate":"","node_geo":{"lat":"","lon":"","alt":""}}' >> test.log
+
+-- reboot_time is not null
+echo '{"event_time":"2016-08-18T15:25:29.000Z","node_id":"0001.0000000B","event_type":"1","measure_time":"2016.8.18","voltage":"0","ampere":"0","power_factor":"1","active_power":"0.000","reactive_power":"0","apparent_power":"0","amount_of_active_power":"0","als_level":"","dimming_level":"","vibration_x":"","vibration_y":"","vibration_z":"","vibration_max":"","noise_origin_decibel":"","noise_origin_frequency":"","noise_decibel":"","noise_frequency":"","gps_longitude":"","gps_latitude":"","gps_altitude":"","gps_satellite_count":"","status_als":"","status_gps":"","status_noise":"","status_vibration":"","status_power_meter":"","status_emergency_led_active":"","status_self_diagnostics_led_active":"","status_active_mode":"","status_led_on_off_type":"","reboot_time":"2016-08-17T15:25:29.000Z","event_remain":"0","failfirmwareupdate":"","node_geo":{"lat":"","lon":"","alt":""}}' >> test.log
+
+-- gps data is not null
+echo '{"event_time":"2016-08-15T08:50:06.000Z","node_id":"0001.00000001","event_type":"65","measure_time":"2016.8.15","voltage":"","ampere":"","power_factor":"","active_power":"","reactive_power":"","apparent_power":"","amount_of_active_power":"","als_level":"","dimming_level":"","vibration_x":"","vibration_y":"","vibration_z":"","vibration_max":"","noise_origin_decibel":"","noise_origin_frequency":"","noise_decibel":"","noise_frequency":"","gps_longitude":"127.029","gps_latitude":"37.5166","gps_altitude":"10.1","gps_satellite_count":"3","status_als":"","status_gps":"","status_noise":"","status_vibration":"","status_power_meter":"","status_emergency_led_active":"","status_self_diagnostics_led_active":"","status_active_mode":"","status_led_on_off_type":"","reboot_time":"","event_remain":"0","failfirmwareupdate":"","node_geo":{"lat":"37.5166","lon":"127.029"}}' >> test.log
+
+
