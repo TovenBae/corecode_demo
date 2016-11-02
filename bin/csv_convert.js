@@ -9,9 +9,9 @@ parse(tb_node_raw, {comment:"#"}, function(csv_err, csv_data){
     return console.log(csv_err);
   }
   console.log(csv_data.length);
-  // console.log("%j",csv_data[0]);
-  // console.log("%j",csv_data[1]);
-  // console.log("%j",csv_data[2]);
+  console.log("%j",csv_data[0]);
+  console.log("%j",csv_data[1]);
+  console.log("%j",csv_data[2]);
 
   for(var cd=1; cd< csv_data.length ; cd+=1){
   // for(var cd=1; cd< 1000 ; cd++){
