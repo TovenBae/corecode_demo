@@ -68,3 +68,17 @@ echo '{"event_time":"2016-08-18T15:25:29.000Z","node_id":"0001.0000000B","event_
 echo '{"event_time":"2016-08-15T08:50:06.000Z","node_id":"0001.00000001","event_type":"65","measure_time":"2016.8.15","voltage":"","ampere":"","power_factor":"","active_power":"","reactive_power":"","apparent_power":"","amount_of_active_power":"","als_level":"","dimming_level":"","vibration_x":"","vibration_y":"","vibration_z":"","vibration_max":"","noise_origin_decibel":"","noise_origin_frequency":"","noise_decibel":"","noise_frequency":"","gps_longitude":"127.029","gps_latitude":"37.5166","gps_altitude":"10.1","gps_satellite_count":"3","status_als":"","status_gps":"","status_noise":"","status_vibration":"","status_power_meter":"","status_emergency_led_active":"","status_self_diagnostics_led_active":"","status_active_mode":"","status_led_on_off_type":"","reboot_time":"","event_remain":"0","failfirmwareupdate":"","node_geo":{"lat":"37.5166","lon":"127.029"}}' >> test.log
 
 
+-- timelion
+.es(index="corecode-2016-08", timefield="event_time", metric="sum:status_als", q="0001.00000001"), .es(index="corecode-2016-08", timefield="event_time", metric="sum:status_als", q="0001.0000000B"), .es(index="corecode-2016-08", timefield="event_time", metric="sum:status_als", q="0001.0000000B").color(red)
+
+.es(index="corecode-2016-08", timefield="event_time", metric="avg:active_power").label("Power"), .es(index="corecode-2016-08", timefield="event_time", metric="avg:als_level").label("ALS Level"), .es(index="corecode-2016-08", timefield="event_time", metric="avg:dimming_level").label("Dimming Level"), .es(index="corecode-2016-08", timefield="event_time", metric="avg:noise_decibel").label("Noise Decibel"), .es(index="corecode-2016-08", timefield="event_time", metric="avg:noise_frequency").divide(1000).label("Noise Freq./1000"), .es(index="corecode-2016-08", timefield="event_time", metric="avg:vibration_max").label("Variation")
+
+.es(index="corecode-2016-08", timefield="event_time", metric="cardinality:als_level").divide(-1).label("ALS Level"), .es(index="corecode-2016-08", timefield="event_time", metric="cardinality:dimming_level").label("Dimming Level")
+
+
+.es(index="corecode-2016-08", timefield="event_time", metric="cardinality:active_power").label("active_power"), .es(index="corecode-2016-08", timefield="event_time", metric="cardinality:apparent_power").label("apparent_power"), .es(index="corecode-2016-08", timefield="event_time", metric="cardinality:ampere").label("ampere")
+
+.es(index="corecode-2016-08", timefield="event_time", metric="cardinality:noise_decibel").label("noise_decibel"), .es(index="corecode-2016-08", timefield="event_time", metric="cardinality:noise_frequency").label("noise_frequency"), .es(index="corecode-2016-08", timefield="event_time", metric="cardinality:noise_origin_decibel").label("noise_origin_decibel"), .es(index="corecode-2016-08", timefield="event_time", metric="cardinality:noise_origin_frequency").label("noise_origin_frequency")
+
+
+.es(index="corecode-2016-08", timefield="event_time", metric="cardinality:vibration_max").label("vibration_max"), .es(index="corecode-2016-08", timefield="event_time", metric="cardinality:vibration_x").label("vibration_x"), .es(index="corecode-2016-08", timefield="event_time", metric="cardinality:vibration_y").label("vibration_y"), .es(index="corecode-2016-08", timefield="event_time", metric="cardinality:vibration_z").label("vibration_z")
