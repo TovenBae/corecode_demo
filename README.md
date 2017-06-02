@@ -7,5 +7,5 @@ npm install
 ```
 
 ## 1. 실행명령어
+<pre><code>~/corecode-demo/bin$node busan_csv_convert.js ../source/tb_node_raw.0315.csv</code></pre>
 
-~/corecode-demo/bin$node busan_csv_convert.js ../source/tb_node_raw.0315.csv
