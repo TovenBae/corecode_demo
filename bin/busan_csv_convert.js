@@ -45,9 +45,7 @@ parse(tb_node_raw, {comment:"#"}, function(csv_err, csv_data){
   }
   // 2. Node의 GEO 정보를 파일로 저장한다.
   geo_meta = JSON.stringify(geo_meta,null,'\t');
-  fs.writeFileSync('./node_geo.json', geo_meta, function(err) {
-    if(err) return console.error(err);
-  })
+  fs.writeFileSync('./node_geo.json', geo_meta);
   console.log('Completed to generate node_geo.json File!!!');
   // process.exit(1);
 
